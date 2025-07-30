@@ -34,7 +34,6 @@
             transform: translateY(0);
             pointer-events: auto; /* Re-enable pointer events when visible */
         }
-        /* Removed .dropdown-submenu:hover .sub-link { text-decoration: underline; } */
         .slide-indicator.active {
             background-color: var(--primary-green); /* Green color for active indicator */
         }
@@ -98,12 +97,68 @@
         .nav-link-animated:not(:hover)::after {
             transition: width 0s; /* Instant disappearance */
         }
+
+        /* Header scroll effect */
+        #main-header {
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .header-transparent {
+            background-color: transparent;
+            box-shadow: none;
+        }
+
+        /* Text and icon colors when header is transparent */
+        .header-transparent .text-gray-900, /* For PPMC text logo */
+        .header-transparent .text-gray-700 { /* For nav links and search icon */
+            color: white;
+        }
+        .header-transparent .pxl-button-custom {
+            /* Keep button background primary-green, but text white */
+            background-color: var(--primary-green);
+            color: white;
+        }
+        .header-transparent .pxl-button-custom svg path {
+            fill: white; /* Make Contact Us button arrow white */
+        }
+        .header-transparent .text-gray-700 svg path { /* Make search icon white */
+            stroke: white;
+        }
+        /* Logo image filter for transparent header */
+        .header-transparent img[alt="PPMC Logo"] {
+            filter: invert(1) brightness(2); /* Invert colors to make dark logo white */
+        }
+
+
+        .header-scrolled {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Text and icon colors when header is scrolled */
+        .header-scrolled .text-gray-900, /* For PPMC text logo */
+        .header-scrolled .text-gray-700 { /* For nav links and search icon */
+            color: var(--text-color); /* Revert to dark text */
+        }
+        .header-scrolled .text-gray-700 svg path { /* Revert search icon to dark */
+            stroke: var(--text-color);
+        }
+        /* Logo image filter for scrolled header */
+        .header-scrolled img[alt="PPMC Logo"] {
+            filter: none; /* Remove filter when scrolled */
+        }
+
+        /* Dropdown menu item hover color */
+        .dropdown-menu a:hover {
+            background-color: var(--light-gray); /* Light gray background on hover */
+            color: var(--primary-green); /* Green text on hover */
+        }
     </style>
 </head>
 <body class="font-sans antialiased text-gray-800">
 
     <!-- Header Section -->
-    <header class="bg-white shadow-md">
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 header-transparent">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center">
                 <!-- PPMC Logo (PNG) -->
@@ -302,7 +357,7 @@
                     <li><span class="font-bold">Resource Center:</span> Visit our <a href="#" class="text-primary-green hover:underline">online resource center</a> for whitepapers, case studies, and technical documentation.</li>
                     <li><span class="font-bold">Consultation Services:</span> Schedule a free consultation with our experts to discuss your specific energy challenges.</li>
                     <li><span class="font-bold">Industry Reports:</span> Access our annual industry reports on energy trends and market analysis.</li>
-                    <li><span class="font-bold">Client Success Stories:</span> Explore how our solutions have empowered our clients to achieve their energy goals.</li>
+                    <li><a href="#" class="text-primary-green hover:underline">Client Success Stories:</a> Explore how our solutions have empowered our clients to achieve their energy goals.</li>
                 </ul>
                 <a href="#" class="mt-8 inline-block bg-primary-green hover:bg-light-green text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300">Contact Us</a>
             </div>
@@ -442,6 +497,21 @@
 
         // Initialize with 'Top News' shown
         document.querySelector('.news-filter-btn[data-filter="top"]').click();
+
+
+        // Header scroll effect JavaScript
+        const mainHeader = document.getElementById('main-header');
+        const scrollThreshold = 50; // Pixels to scroll before changing header
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > scrollThreshold) {
+                mainHeader.classList.remove('header-transparent');
+                mainHeader.classList.add('header-scrolled');
+            } else {
+                mainHeader.classList.remove('header-scrolled');
+                mainHeader.classList.add('header-transparent');
+            }
+        });
     </script>
 </body>
 </html>
