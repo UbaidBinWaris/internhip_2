@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PPMC - Power Planning & Monitoring Company</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .nav-item:hover .submenu {
+        display: block;
+      }
+      .submenu {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-gray-900">
+    <!-- Header/Navbar -->
+    <header class="bg-green-700 text-white shadow">
+      <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+        <div class="text-xl font-bold">PPMC</div>
+        <nav class="space-x-6 flex">
+          <div class="relative nav-item">
+            <a href="#" class="hover:underline">About</a>
+            <div class="absolute submenu bg-white text-black shadow-md mt-2 p-2 rounded">
+              <a href="#" class="block hover:underline px-2 py-1">Mission</a>
+              <a href="#" class="block hover:underline px-2 py-1">Team</a>
+            </div>
+          </div>
+          <div class="relative nav-item">
+            <a href="#" class="hover:underline">Projects</a>
+            <div class="absolute submenu bg-white text-black shadow-md mt-2 p-2 rounded">
+              <a href="#" class="block hover:underline px-2 py-1">Current</a>
+              <a href="#" class="block hover:underline px-2 py-1">Past</a>
+            </div>
+          </div>
+          <a href="#news" class="hover:underline">News</a>
+          <a href="#contact" class="hover:underline">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-[80vh] overflow-hidden">
+      <div id="slides" class="w-full h-full flex transition-transform duration-700">
+        <div class="w-full flex-shrink-0 bg-cover bg-center text-white flex items-center justify-center flex-col text-center px-4" style="background-image: url('https://source.unsplash.com/1600x900/?power');">
+          <h1 class="text-4xl font-bold mb-4">Empowering Pakistan’s Energy Future</h1>
+          <button class="bg-green-600 px-6 py-2 rounded hover:bg-green-800">Learn More</button>
+        </div>
+        <div class="w-full flex-shrink-0 bg-cover bg-center text-white flex items-center justify-center flex-col text-center px-4" style="background-image: url('https://source.unsplash.com/1600x900/?energy');">
+          <h1 class="text-4xl font-bold mb-4">Reliable Power Planning & Monitoring</h1>
+          <button class="bg-green-600 px-6 py-2 rounded hover:bg-green-800">Explore Projects</button>
+        </div>
+      </div>
+      <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <button onclick="goToSlide(0)" class="w-3 h-3 rounded-full bg-white opacity-50"></button>
+        <button onclick="goToSlide(1)" class="w-3 h-3 rounded-full bg-white opacity-50"></button>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="max-w-7xl mx-auto px-4 py-12">
+      <h2 class="text-2xl font-bold mb-6">Latest Local News</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-100 p-4 rounded shadow">
+          <h3 class="text-lg font-semibold">Electricity Shortage Resolved in Lahore</h3>
+          <p class="text-sm mt-2">July 28, 2025 - The issue of electricity shortage has been managed due to increased monitoring.</p>
+        </div>
+        <div class="bg-gray-100 p-4 rounded shadow">
+          <h3 class="text-lg font-semibold">Solar Energy Project Launched in Sindh</h3>
+          <p class="text-sm mt-2">July 25, 2025 - A new renewable project has been initiated to boost green energy.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trending Tabs -->
+    <section class="max-w-7xl mx-auto px-4 py-12">
+      <h2 class="text-2xl font-bold mb-6">Explore News</h2>
+      <div class="flex space-x-4 mb-4">
+        <button onclick="switchTab('top')" class="tab-btn px-4 py-2 bg-green-600 text-white rounded">Top</button>
+        <button onclick="switchTab('trending')" class="tab-btn px-4 py-2 bg-gray-300 text-black rounded">Trending</button>
+        <button onclick="switchTab('liked')" class="tab-btn px-4 py-2 bg-gray-300 text-black rounded">Most Liked</button>
+      </div>
+      <div id="newsCards">
+        <!-- News cards inserted dynamically -->
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="bg-green-50 px-4 py-12">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-2xl font-bold mb-4">About PPMC</h2>
+        <p class="mb-6">Power Planning and Monitoring Company (PPMC) is a government initiative focused on optimizing energy planning and real-time monitoring of power generation and distribution in Pakistan.</p>
+        <ul class="list-disc list-inside">
+          <li>Smart grid management</li>
+          <li>Renewable energy integration</li>
+          <li>Analytics-driven monitoring</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 text-center">
+      <p>&copy; 2025 Power Planning & Monitoring Company. All rights reserved.</p>
+    </footer>
+
+    <script>
+      let currentSlide = 0;
+      function goToSlide(index) {
+        const slider = document.getElementById('slides');
+        const buttons = document.querySelectorAll('[onclick^="goToSlide"]');
+        slider.style.transform = `translateX(-${index * 100}%)`;
+        currentSlide = index;
+        buttons.forEach((btn, i) => btn.classList.toggle('opacity-100', i === index));
+      }
+
+      const topNews = [
+        { title: 'Power Grid Maintenance in Multan', date: 'July 20, 2025' },
+        { title: 'Wind Energy Reaches Milestone', date: 'July 15, 2025' }
+      ];
+
+      const trendingNews = [
+        { title: 'Energy Saving Tips for Homes', date: 'July 10, 2025' },
+        { title: 'Load Shedding Reduced by 30%', date: 'July 5, 2025' }
+      ];
+
+      const likedNews = [
+        { title: 'Hydro Projects Get Funding', date: 'June 30, 2025' },
+        { title: 'Smart Meters Deployed Nationally', date: 'June 28, 2025' }
+      ];
+
+      function switchTab(type) {
+        const container = document.getElementById('newsCards');
+        const data = type === 'top' ? topNews : type === 'trending' ? trendingNews : likedNews;
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+          btn.classList.remove('bg-green-600', 'text-white');
+          btn.classList.add('bg-gray-300', 'text-black');
+        });
+        event.target.classList.add('bg-green-600', 'text-white');
+        event.target.classList.remove('bg-gray-300', 'text-black');
+        container.innerHTML = data.map(news => `
+          <div class="bg-gray-100 p-4 rounded shadow mb-4">
+            <h3 class="text-lg font-semibold">${news.title}</h3>
+            <p class="text-sm mt-1">${news.date}</p>
+          </div>
+        `).join('');
+      }
+
+      goToSlide(0);
+      switchTab('top');
+    </script>
+  </body>
+</html>

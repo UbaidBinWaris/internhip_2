@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Planning & Monitoring Company</title>
+    <!-- Tailwind CSS CDN - In a real project, you'd compile your Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS for hover effects and specific layouts not easily done with pure Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .dropdown-menu {
+            display: none;
+        }
+        .nav-item:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-submenu:hover .sub-link {
+            text-decoration: underline;
+        }
+        /* Color scheme inspired by "Last Year Best Color" - assuming a vibrant green/teal */
+        :root {
+            --primary-green: #10B981; /* Emerald Green */
+            --light-green: #6EE7B7; /* Light Green */
+            --dark-blue: #1E3A8A; /* Dark Blue for contrast */
+            --light-gray: #F3F4F6; /* Light Gray for backgrounds */
+            --text-color: #1F2937; /* Dark text */
+        }
+        .bg-primary-green { background-color: var(--primary-green); }
+        .text-primary-green { color: var(--primary-green); }
+        .hover\:bg-light-green:hover { background-color: var(--light-green); }
+        .border-primary-green { border-color: var(--primary-green); }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <!-- PPMC Logo (PNG) -->
+                <img src="https://ppmc.gov.pk/wp-content/uploads/2024/07/ppmc-hd-logo.png" alt="PPMC Logo" class="h-12 w-auto mr-3">
+                <a href="#" class="text-2xl font-bold text-gray-900">PPMC</a>
+            </div>
+            <ul class="flex space-x-8 items-center">
+                <li class="relative nav-item group">
+                    <a href="#" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300">Solutions</a>
+                    <div class="dropdown-menu absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 z-10">
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Power Generation</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Grid Management</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Energy Efficiency</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Renewable Integration</a>
+                    </div>
+                </li>
+                <li class="relative nav-item group">
+                    <a href="#" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300">Services</a>
+                    <div class="dropdown-menu absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 z-10">
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Consulting</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Implementation</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Maintenance</a>
+                    </div>
+                </li>
+                <li><a href="#" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300">About Us</a></li>
+                <li><a href="#" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300">News</a></li>
+                <li><a href="#" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300">Contact</a></li>
+                <li>
+                    <!-- Search Icon (SVG) -->
+                    <button class="ml-4 text-gray-700 hover:text-primary-green transition duration-300 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section - Static NEPRA style -->
+    <section class="relative h-screen bg-gray-900 overflow-hidden flex items-center justify-center text-center">
+        <img src="https://placehold.co/1920x1080/1E3A8A/FFFFFF?text=Modern+Power+Control+Room" alt="PPMC Hero Background" class="absolute inset-0 w-full h-full object-cover opacity-60">
+        <div class="relative z-10 text-white p-8 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">Empowering Pakistan's Energy Future</h1>
+            <p class="text-xl md:text-2xl mb-8">Driving innovation in power planning, monitoring, and regulation for a sustainable and reliable energy landscape.</p>
+            <button class="bg-primary-green hover:bg-light-green text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-lg hover:shadow-xl">Discover Our Mission</button>
+        </div>
+    </section>
+
+    <!-- Local News Section -->
+    <section class="py-16 bg-light-gray">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">Local News & Updates</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/0F766E/FFFFFF?text=Solar+Park+Inauguration" alt="Solar Park Inauguration" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Govt to Cut Power Sector Circular Debt Significantly</h3>
+                        <p class="text-gray-600 text-sm mb-4">July 29, 2025</p>
+                        <p class="text-gray-700 mb-4">Major restructuring efforts aim to reduce the power sector's circular debt from Rs2.38 trillion to Rs561 billion.</p>
+                        <a href="#" class="text-primary-green hover:underline font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+                <!-- News Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/065F46/FFFFFF?text=Grid+Modernization" alt="Grid Modernization" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">K-Electric Receives Cheaper Power from Sindh's Hybrid, Solar Parks</h3>
+                        <p class="text-gray-600 text-sm mb-4">July 30, 2025</p>
+                        <p class="text-700 mb-4">Nasir Shah announces K-Electric is now being supplied with more affordable power from new renewable sources in Sindh.</p>
+                        <a href="#" class="text-primary-green hover:underline font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+                <!-- News Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/047857/FFFFFF?text=Energy+Summit" alt="Energy Summit" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Diplomats Briefed on Power Sector Developments</h3>
+                        <p class="text-gray-600 text-sm mb-4">July 30, 2025</p>
+                        <p class="text-gray-700 mb-4">International diplomats received updates on Pakistan's economic achievements and reforms in the energy sector.</p>
+                        <a href="#" class="text-primary-green hover:underline font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top, Trending, Liked News Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">Our Insights</h2>
+            <div class="flex justify-center mb-8">
+                <button class="news-filter-btn px-6 py-3 mx-2 rounded-full text-lg font-semibold bg-gray-200 text-gray-700 hover:bg-primary-green hover:text-white transition-colors duration-300" data-filter="top">Top News</button>
+                <button class="news-filter-btn px-6 py-3 mx-2 rounded-full text-lg font-semibold bg-gray-200 text-gray-700 hover:bg-primary-green hover:text-white transition-colors duration-300" data-filter="trending">Trending</button>
+                <button class="news-filter-btn px-6 py-3 mx-2 rounded-full text-lg font-semibold bg-gray-200 text-gray-700 hover:bg-primary-green hover:text-white transition-colors duration-300" data-filter="liked">Liked</button>
+            </div>
+
+            <div id="news-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News cards will be dynamically loaded here based on filter -->
+                <div class="news-card bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200" data-category="top">
+                    <img src="https://placehold.co/600x400/15803D/FFFFFF?text=Energy+Economy" alt="Top News" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Pakistan's Electricity Sector: Challenges and Opportunities</h3>
+                        <p class="text-gray-600 text-sm mb-4">July 29, 2025</p>
+                        <p class="text-gray-700 mb-4">An in-depth look at high tariffs, outdated pricing, and industrial exodus affecting the national grid.</p>
+                        <a href="#" class="text-primary-green hover:underline font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+                <div class="news-card bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200" data-category="trending">
+                    <img src="https://placehold.co/600x400/0F766E/FFFFFF?text=Solar+Revolution" alt="Trending News" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">The Silent Solar Revolution in Pakistan's Energy Landscape</h3>
+                        <p class="text-gray-600 text-sm mb-4">July 19, 2025</p>
+                        <p class="text-gray-700 mb-4">Industrial and agricultural sectors increasingly shift to solar, impacting the national grid's stability.</p>
+                        <a href="#" class="text-primary-green hover:underline font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+                <div class="news-card bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200" data-category="top">
+                    <img src="https://placehold.co/600x400/065F46/FFFFFF?text=Power+Sector+Reforms" alt="Top News" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Quarterly Tariff Adjustments: DISCOs Seek NEPRA Nod for Refunds</h3>
+                        <p class="text-gray-600 text-sm mb-4">July 30, 2025</p>
+                        <p class="text-gray-700 mb-4">Distribution companies request approval from NEPRA for a significant refund to consumers.</p>
+                        <a href="#" class="text-primary-green hover:underline font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+                <div class="news-card bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200" data-category="liked">
+                    <img src="https://placehold.co/600x400/047857/FFFFFF?text=Renewable+Future" alt="Liked News" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Net Metering: An Impending Source of Relief for Consumers</h3>
+                        <p class="text-gray-600 text-sm mb-4">December 18, 2023</p>
+                        <p class="text-gray-700 mb-4">The net metering system allows citizens to earn by selling excess electricity back to DISCOs.</p>
+                        <a href="#" class="text-primary-green hover:underline font-semibold">Read More &rarr;</a>
+                    </div>
+                </div>
+                <!-- More cards can be added here with different data-category attributes -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About PPMC Section -->
+    <section class="py-16 bg-light-gray">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <h2 class="text-4xl font-bold mb-6 text-gray-900">About PPMC: Powering Progress</h2>
+                <p class="text-lg text-gray-700 mb-4">PPMC (Power Planning and Monitoring Company) serves as the policy, strategic, and technical arm of the Ministry of Energy (Power Division). We are dedicated to designing and developing comprehensive Electricity Plans for Pakistan.</p>
+                <p class="text-lg text-gray-700 mb-6">Our expertise includes carrying out simulations, studies, scenarios, and economic analysis to provide sectorial support on policy directives and interventions envisaged in the National Electricity Plan. We are committed to fostering a sustainable and resilient energy infrastructure.</p>
+                <h3 class="text-2xl font-semibold mb-4 text-gray-900">How to Get Information & Use Cases:</h3>
+                <ul class="list-disc list-inside text-lg text-gray-700 space-y-2">
+                    <li><span class="font-bold">Resource Center:</span> Visit our <a href="#" class="text-primary-green hover:underline">online resource center</a> for whitepapers, case studies, and technical documentation.</li>
+                    <li><span class="font-bold">Consultation Services:</span> Schedule a free consultation with our experts to discuss your specific energy challenges.</li>
+                    <li><span class="font-bold">Industry Reports:</span> Access our annual industry reports on energy trends and market analysis.</li>
+                    <li><span class="font-bold">Client Success Stories:</span> Explore how our solutions have empowered our clients to achieve their energy goals.</li>
+                </ul>
+                <a href="#" class="mt-8 inline-block bg-primary-green hover:bg-light-green text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300">Contact Us</a>
+            </div>
+            <div class="order-1 md:order-2">
+                <!-- Image for PPMC Overview -->
+                <img src="https://placehold.co/600x400/10B981/FFFFFF?text=PPMC+Overview" alt="About PPMC" class="rounded-lg shadow-lg w-full">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-dark-blue text-white py-12">
+        <div class="container mx-auto px-6 flex flex-wrap justify-between items-start">
+            <div class="w-full md:w-1/3 mb-8 md:mb-0">
+                <h3 class="text-2xl font-bold mb-4">PPMC</h3>
+                <p class="text-gray-300">Empowering a sustainable energy future through innovation and expertise.</p>
+                <div class="flex space-x-4 mt-6">
+                    <!-- Social Media Icons (SVGs) -->
+                    <a href="#" class="text-gray-300 hover:text-white transition"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.247 0-1.625.776-1.625 1.563V12h2.773l-.443 2.89h-2.33V22H12c5.523 0 10-4.477 10-10z" clip-rule="evenodd" /></svg></a>
+                    <a href="#" class="text-gray-300 hover:text-white transition"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19.5 2h-15A2.5 2.5 0 002 4.5v15A2.5 2.5 0 004.5 22h15a2.5 2.5 0 002.5-2.5v-15A2.5 2.5 0 0019.5 2zM12 17.25a5.25 5.25 0 110-10.5 5.25 5.25 0 010 10.5zm.75-8.25a.75.75 0 10-1.5 0 .75.75 0 001.5 0z" clip-rule="evenodd" /></svg></a>
+                    <a href="#" class="text-gray-300 hover:text-white transition"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 1.579a.5.5 0 01.442-.442l23 6a.5.5 0 010 .92l-23 6a.5.5 0 01-.442-.442V1.579zM6 10l-4 2.5V11a.5.5 0 01.5-.5H6zm10 2l-4 2.5V11a.5.5 0 01.5-.5H16z"/></svg></a>
+                </div>
+            </div>
+            <div class="w-full md:w-1/3 mb-8 md:mb-0">
+                <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-300 hover:text-white transition">Home</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white transition">Solutions</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white transition">Services</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white transition">About Us</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white transition">News</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white transition">Contact</a></li>
+                </ul>
+            </div>
+            <div class="w-full md:w-1/3">
+                <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+                <p class="text-gray-300 mb-2">123 Energy Way, Islamabad, Pakistan</p>
+                <p class="text-gray-300 mb-2">Email: info@ppmc.com</p>
+                <p class="text-gray-300">Phone: +92 51 123 4567</p>
+            </div>
+        </div>
+        <div class="mt-8 border-t border-gray-700 pt-8 text-center text-gray-400">
+            &copy; 2025 PPMC. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // News Section Filtering JavaScript (Hero slider JS removed as it's now static)
+        const newsFilterButtons = document.querySelectorAll('.news-filter-btn');
+        const newsCardsContainer = document.getElementById('news-cards-container');
+        const allNewsCards = document.querySelectorAll('.news-card');
+
+        newsFilterButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const filter = e.target.dataset.filter;
+
+                // Remove active styling from all buttons
+                newsFilterButtons.forEach(btn => {
+                    btn.classList.remove('bg-primary-green', 'text-white');
+                    btn.classList.add('bg-gray-200', 'text-gray-700');
+                });
+
+                // Add active styling to the clicked button
+                e.target.classList.add('bg-primary-green', 'text-white');
+                e.target.classList.remove('bg-gray-200', 'text-gray-700');
+
+                allNewsCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block'; // Or 'grid'/'flex' depending on your desired layout
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Initialize with 'Top News' shown
+        document.querySelector('.news-filter-btn[data-filter="top"]').click();
+    </script>
+</body>
+</html>
