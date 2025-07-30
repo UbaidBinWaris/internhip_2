@@ -21,6 +21,9 @@
         .dropdown-submenu:hover .sub-link {
             text-decoration: underline;
         }
+        .slide-indicator.active {
+            background-color: var(--primary-green); /* Green color for active indicator */
+        }
         /* Color scheme inspired by "Last Year Best Color" - assuming a vibrant green/teal */
         :root {
             --primary-green: #10B981; /* Emerald Green */
@@ -78,14 +81,46 @@
         </nav>
     </header>
 
-    <!-- Hero Section - Static NEPRA style -->
-    <section class="relative h-screen bg-gray-900 overflow-hidden flex items-center justify-center text-center">
-        <img src="https://placehold.co/1920x1080/1E3A8A/FFFFFF?text=Modern+Power+Control+Room" alt="PPMC Hero Background" class="absolute inset-0 w-full h-full object-cover opacity-60">
-        <div class="relative z-10 text-white p-8 max-w-4xl mx-auto">
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">Empowering Pakistan's Energy Future</h1>
-            <p class="text-xl md:text-2xl mb-8">Driving innovation in power planning, monitoring, and regulation for a sustainable and reliable energy landscape.</p>
-            <button class="bg-primary-green hover:bg-light-green text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-lg hover:shadow-xl">Discover Our Mission</button>
+    <!-- Hero Section - With Slider and reduced height -->
+    <section class="relative h-[60vh] bg-gray-900 overflow-hidden">
+        <div id="hero-slider" class="absolute inset-0 flex transition-transform duration-1000 ease-in-out">
+            <!-- Slide 1 -->
+            <div class="w-full flex-shrink-0 relative flex items-center justify-center text-center">
+                <img src="https://placehold.co/1920x1080/0F766E/FFFFFF?text=Power+Plant" alt="Power Plant" class="absolute inset-0 w-full h-full object-cover opacity-60">
+                <div class="relative z-10 text-white p-8">
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Optimizing Energy for a Brighter Future</h1>
+                    <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Innovative solutions for power planning, monitoring, and sustainable energy management.</p>
+                    <button class="bg-primary-green hover:bg-light-green text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300">Learn More</button>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="w-full flex-shrink-0 relative flex items-center justify-center text-center">
+                <img src="https://placehold.co/1920x1080/065F46/FFFFFF?text=Smart+Grid" alt="Smart Grid" class="absolute inset-0 w-full h-full object-cover opacity-60">
+                <div class="relative z-10 text-white p-8">
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Intelligent Grid Management Systems</h1>
+                    <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Harnessing AI and data analytics for efficient and resilient power distribution.</p>
+                    <button class="bg-primary-green hover:bg-light-green text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300">Explore Solutions</button>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="w-full flex-shrink-0 relative flex items-center justify-center text-center">
+                <img src="https://placehold.co/1920x1080/047857/FFFFFF?text=Renewable+Energy" alt="Renewable Energy" class="absolute inset-0 w-full h-full object-cover opacity-60">
+                <div class="relative z-10 text-white p-8">
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Pioneering Renewable Energy Integration</h1>
+                    <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Empowering a sustainable tomorrow with advanced renewable energy solutions.</p>
+                    <button class="bg-primary-green hover:bg-light-green text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300">Discover More</button>
+                </div>
+            </div>
         </div>
+
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+            <button class="slide-indicator w-3 h-3 bg-gray-400 rounded-full focus:outline-none" data-slide="0"></button>
+            <button class="slide-indicator w-3 h-3 bg-gray-400 rounded-full focus:outline-none" data-slide="1"></button>
+            <button class="slide-indicator w-3 h-3 bg-gray-400 rounded-full focus:outline-none" data-slide="2"></button>
+        </div>
+
+        <button id="slide-prev" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 p-2 rounded-full text-white text-2xl z-20 hover:bg-opacity-50 transition"><</button>
+        <button id="slide-next" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 p-2 rounded-full text-white text-2xl z-20 hover:bg-opacity-50 transition">></button>
     </section>
 
     <!-- Local News Section -->
@@ -240,7 +275,68 @@
     </footer>
 
     <script>
-        // News Section Filtering JavaScript (Hero slider JS removed as it's now static)
+        // Hero Slider JavaScript
+        const slider = document.getElementById('hero-slider');
+        const slides = slider.children;
+        const indicators = document.querySelectorAll('.slide-indicator');
+        const prevBtn = document.getElementById('slide-prev');
+        const nextBtn = document.getElementById('slide-next');
+        let currentSlide = 0;
+        let slideInterval;
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            indicators.forEach((indicator, index) => {
+                if (index === currentSlide) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSlider();
+        }
+
+        function startSlideShow() {
+            slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+        }
+
+        function resetSlideShow() {
+            clearInterval(slideInterval);
+            startSlideShow();
+        }
+
+        indicators.forEach(indicator => {
+            indicator.addEventListener('click', (e) => {
+                currentSlide = parseInt(e.target.dataset.slide);
+                updateSlider();
+                resetSlideShow();
+            });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetSlideShow();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetSlideShow();
+        });
+
+        // Initialize slider
+        updateSlider();
+        startSlideShow();
+
+        // News Section Filtering JavaScript
         const newsFilterButtons = document.querySelectorAll('.news-filter-btn');
         const newsCardsContainer = document.getElementById('news-cards-container');
         const allNewsCards = document.querySelectorAll('.news-card');
