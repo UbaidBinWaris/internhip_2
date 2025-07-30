@@ -14,13 +14,27 @@
         }
         .dropdown-menu {
             display: none;
+            position: absolute;
+            left: 0;
+            top: 100%; /* Position below the parent link */
+            min-width: 160px; /* Adjust width as needed */
+            background-color: white;
+            border-radius: 0.375rem; /* rounded-md */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            padding: 0.5rem 0; /* py-2 */
+            z-index: 10;
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(-10px); /* Initial state for animation */
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Animation properties */
+            pointer-events: none; /* Allows hover to trigger on parent before menu appears */
         }
         .nav-item:hover .dropdown-menu {
             display: block;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto; /* Re-enable pointer events when visible */
         }
-        .dropdown-submenu:hover .sub-link {
-            text-decoration: underline;
-        }
+        /* Removed .dropdown-submenu:hover .sub-link { text-decoration: underline; } */
         .slide-indicator.active {
             background-color: var(--primary-green); /* Green color for active indicator */
         }
@@ -36,6 +50,54 @@
         .text-primary-green { color: var(--primary-green); }
         .hover\:bg-light-green:hover { background-color: var(--light-green); }
         .border-primary-green { border-color: var(--primary-green); }
+
+        /* Custom button style for Contact Us to match the provided snippet */
+        .pxl-button-custom {
+            background-color: var(--primary-green);
+            color: white;
+            font-weight: bold;
+            padding: 0.75rem 1.5rem; /* py-3 px-6 */
+            border-radius: 9999px; /* rounded-full */
+            display: inline-flex;
+            align-items: center;
+            transition: background-color 300ms ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+        }
+        .pxl-button-custom:hover {
+            background-color: var(--light-green);
+        }
+        .pxl-button-custom svg {
+            margin-left: 0.5rem; /* ml-2 */
+            width: 1.5rem; /* h-6 w-6 */
+            height: 1.5rem;
+        }
+
+        /* Nav item hover underline animation */
+        .nav-link-animated {
+            position: relative;
+            display: inline-block; /* Ensures pseudo-element positions correctly */
+            padding-bottom: 2px; /* Space for the line */
+        }
+
+        .nav-link-animated::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-green);
+            transition: width 0.3s ease-in-out; /* Animation for appearing */
+        }
+
+        .nav-link-animated:hover::after {
+            width: 100%;
+            transition: width 0.3s ease-in-out; /* Animation for appearing */
+        }
+
+        .nav-link-animated:not(:hover)::after {
+            transition: width 0s; /* Instant disappearance */
+        }
     </style>
 </head>
 <body class="font-sans antialiased text-gray-800">
@@ -46,38 +108,51 @@
             <div class="flex items-center">
                 <!-- PPMC Logo (PNG) -->
                 <img src="https://ppmc.gov.pk/wp-content/uploads/2024/07/ppmc-hd-logo.png" alt="PPMC Logo" class="h-12 w-auto mr-3">
-                <a href="#" class="text-2xl font-bold text-gray-900">PPMC</a>
+                <a href="https://ppmc.gov.pk/" class="text-2xl font-bold text-gray-900">PPMC</a>
             </div>
-            <ul class="flex space-x-8 items-center">
-                <li class="relative nav-item group">
-                    <a href="#" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300">Solutions</a>
-                    <div class="dropdown-menu absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 z-10">
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Power Generation</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Grid Management</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Energy Efficiency</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Renewable Integration</a>
-                    </div>
-                </li>
-                <li class="relative nav-item group">
-                    <a href="#" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300">Services</a>
-                    <div class="dropdown-menu absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 z-10">
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Consulting</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Implementation</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 dropdown-submenu group-hover:underline sub-link">Maintenance</a>
-                    </div>
-                </li>
-                <li><a href="#" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300">About Us</a></li>
-                <li><a href="#" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300">News</a></li>
-                <li><a href="#" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300">Contact</a></li>
-                <li>
-                    <!-- Search Icon (SVG) -->
-                    <button class="ml-4 text-gray-700 hover:text-primary-green transition duration-300 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </button>
-                </li>
-            </ul>
+            <div class="flex items-center space-x-8">
+                <ul class="flex space-x-8 items-center">
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-9891 current_page_item menu-item-16126">
+                        <a href="https://ppmc.gov.pk/" aria-current="page" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300 nav-link-animated">Home</a>
+                    </li>
+                    <li class="relative nav-item group menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-16276">
+                        <a href="https://ppmc.gov.pk/about-us/" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300 nav-link-animated">About Us</a>
+                        <ul class="dropdown-menu">
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16275">
+                                <a href="https://ppmc.gov.pk/organization/" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-primary-green sub-link">Organization</a>
+                            </li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16317">
+                                <a href="https://ppmc.gov.pk/board-of-directors/" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-primary-green sub-link">Board of Directors</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="relative nav-item group menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-16400">
+                        <a href="https://ppmc.gov.pk/our-services/" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300 nav-link-animated">Our Services</a>
+                        <ul class="dropdown-menu">
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16401">
+                                <a href="https://ppmc.gov.pk/functional-departments/" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-primary-green sub-link">Functional Departments</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16459">
+                        <a href="https://ppmc.gov.pk/jobs/" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300 nav-link-animated">Career</a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16500">
+                        <a href="https://ppmc.gov.pk/tenders/" class="text-lg font-semibold text-gray-700 hover:text-primary-green transition duration-300 nav-link-animated">Tenders</a>
+                    </li>
+                </ul>
+                <!-- Search Icon -->
+                <button class="text-gray-700 hover:text-primary-green transition duration-300 focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </button>
+                <!-- Contact Us Button -->
+                <a href="https://ppmc.gov.pk/contact-us/" class="pxl-button-custom">
+                    Contact Us
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 1560 1560" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g transform="matrix(1,0,0,1,4.999999999999545,4.547473508864641e-13)"><path d="M1524 811.8H36c-17.7 0-32-14.3-32-32s14.3-32 32-32h1410.7l-194.2-194.2c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l248.9 248.9c9.2 9.2 11.9 22.9 6.9 34.9-5 11.9-16.7 19.7-29.6 19.7z" fill="#ffffff" opacity="1" data-original="#000000"></path><path d="M1274.8 1061c-8.2 0-16.4-3.1-22.6-9.4-12.5-12.5-12.5-32.8 0-45.3l249.2-249.2c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-249.2 249.2c-6.3 6.3-14.5 9.4-22.7 9.4z" fill="#ffffff" opacity="1" data-original="#000000"></path></g></svg>
+                </a>
+            </div>
         </nav>
     </header>
 
