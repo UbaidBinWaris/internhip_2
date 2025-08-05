@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>🌍 Daily Commodity Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-100 text-gray-800 font-sans">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+      <header class="mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold">🌍 Daily Commodity Dashboard</h1>
+        <p class="text-sm text-gray-500 mt-1">Last Updated: {{ timestamp }}</p>
+      </header>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <!-- Oil & Coal -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-xl font-semibold mb-4">🛢️ Oil & Coal</h2>
+          <table class="w-full text-left table-auto">
+            <tbody>
+              <tr><td class="py-2 font-medium">Brent Crude Oil</td><td>{{ brent }}</td></tr>
+              <tr><td class="py-2 font-medium">WTI Crude Oil</td><td>{{ wti }}</td></tr>
+              <tr><td class="py-2 font-medium">Coal</td><td>{{ coal }}</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Bunker -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-xl font-semibold mb-4">🚢 Global Bunker Price</h2>
+          <p class="text-lg">{{ bunker }}</p>
+        </div>
+
+        <!-- USD to PKR -->
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-xl font-semibold mb-4">💱 USD to PKR</h2>
+          <p class="text-lg">{{ usd_to_pkr }}</p>
+        </div>
+
+        <!-- KIBOR -->
+        <div class="bg-white rounded-lg shadow p-6 overflow-x-auto">
+          <h2 class="text-xl font-semibold mb-4">🏦 KIBOR Rates</h2>
+          {% if kibor == "Error" or kibor == "KIBOR data not found" %}
+            <p class="text-red-600">⚠️ Data not available</p>
+          {% else %}
+            <p class="text-sm text-gray-500 mb-2">As on <strong>{{ kibor.date }}</strong></p>
+            <table class="min-w-full text-sm border">
+              <thead class="bg-gray-200 text-gray-700">
+                <tr>
+                  <th class="py-2 px-3 text-left border">Tenor</th>
+                  <th class="py-2 px-3 text-left border">Bid (%)</th>
+                  <th class="py-2 px-3 text-left border">Offer (%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for tenor, rate in kibor.rates.items() %}
+                <tr class="border-t">
+                  <td class="py-2 px-3 border">{{ tenor }}</td>
+                  <td class="py-2 px-3 border">{{ rate.bid }}</td>
+                  <td class="py-2 px-3 border">{{ rate.offer }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% endif %}
+        </div>
+
+        <!-- Charter Rates -->
+        <div class="bg-white rounded-lg shadow p-6 md:col-span-2">
+          <h2 class="text-xl font-semibold mb-4">⚓ Daily Charter Rates</h2>
+          <ul class="list-disc list-inside space-y-1 text-sm sm:text-base">
+            {% for rate in charter_rates %}
+            <li>{{ rate }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
